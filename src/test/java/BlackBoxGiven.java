@@ -452,4 +452,30 @@ public class BlackBoxGiven {
     	myCart.RemoveItem(coors);
     	assertEquals(25.92, myCart.calcCost(), .01);
     }
+
+   /**
+    * Test Case 26
+    * @throws Exception
+    * @throws UnderAgeException
+    */
+   @Test
+   public void savingsAlcoholFrozen11Test() throws Exception, UnderAgeException {
+    myCart.addItem(new Alcohol());
+    myCart.addItem(new FrozenFood());
+    assertEquals(3, myCart.Amount_saved());
+   }
+   
+   /**
+    * Test Case 27
+    * @throws Exception
+    * @throws UnderAgeException
+    */
+   @Test
+   public void savingsProduce3Test() throws Exception, UnderAgeException {
+    for (int i=0; i==2; i++)
+         myCart.addItem(new Produce());;
+    assertEquals(1, myCart.Amount_saved());
+   }
+    
+    
 }
