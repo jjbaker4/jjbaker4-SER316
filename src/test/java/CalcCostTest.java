@@ -1,55 +1,23 @@
 package test.java;
-
-import main.java.*;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
+import main.java.Alcohol;
+import main.java.Cart;
+import main.java.Dairy;
+import main.java.FrozenFood;
+import main.java.Meat;
+import main.java.Produce;
+import main.java.UnderAgeException;
+import static org.junit.Assert.assertEquals;
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
-import java.util.Collection;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-@RunWith(Parameterized.class)
-public class BlackBoxGiven {
-
-    private Class<Cart> classUnderTest;
-
-    @SuppressWarnings("unchecked")
-    public BlackBoxGiven(Object classUnderTest) {
-        this.classUnderTest = (Class<Cart>) classUnderTest;
-    }
-
-    // Define all classes to be tested
-    @Parameterized.Parameters
-    public static Collection<Object[]> cartClassUnderTest() {
-        Object[][] classes = {
-            {Cart0.class},
-            {Cart1.class},
-            {Cart2.class},
-            {Cart3.class},
-            {Cart4.class},
-            {Cart5.class},
-        };
-        return Arrays.asList(classes);
-    }
-
-    private Cart createCart(int age) throws Exception {
-        Constructor<Cart> constructor = classUnderTest.getConstructor(Integer.TYPE);
-        return constructor.newInstance(age);
-    }
-
-    // A sample Cart
+public class CalcCostTest {
 
     Cart cart1;
     double cart1Expected;
     
     Cart myCart;
-    
     Cart cartNegOne;    
     Cart cartZero;
     Cart cartOne;
@@ -67,12 +35,11 @@ public class BlackBoxGiven {
     double frozenExpected;
     
     
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
-
     	
         // cart created with an age 40 shopper
-        cart1 = createCart(40);
+        cart1 = new Cart(40);
         for (int i = 0; i < 2; i++) {
             cart1.addItem(new Alcohol());
         }
@@ -91,74 +58,18 @@ public class BlackBoxGiven {
         meatExpected = 10.80;
         produceExpected = 2.16;
         frozenExpected = 5.40;
+
         
-        //double alcoholFrozen11Expected;
-        //double alcoholFrozen12Expected;
-        //double produce3Expected;
+        cartZero = new Cart(0);
+        cartOne = new Cart(1);
+        cart15 = new Cart(15);
+        cart20 = new Cart(20);
+        cart21 = new Cart(21);
+        cart22 = new Cart(22);
+        cart35 = new Cart(35);
+        cartNegOne = new Cart(-1);
         
-        /*
-        //cart created with an age 20 shopper, containing alcohol
-        ageCart20 = createCart(20);
-        ageCart20.addItem(new Alcohol());
-        
-        //cart created with an age 21 shopper, containing alcohol
-        ageCart21 = createCart(21);
-        ageCart21.addItem(new Alcohol());
-        
-        //cart created with an age 22 shopper, containing alcohol
-        ageCart22 = createCart(22);
-        ageCart22.addItem(new Alcohol());
-        
-        //cart created with an age 15 shopper, containing alcohol
-        ageCart15 = createCart(15);
-        ageCart15.addItem(new Alcohol());
-        
-        //cart created with an age 35 shopper, containing alcohol
-        ageCart35 = createCart(35);
-        ageCart35.addItem(new Alcohol());
-        
-        //cart created with of-age shopper w/ 1 alcohol
-        alcohol = createCart(40);
-        alcohol.addItem(new Alcohol());
-        alcoholExpected = 8.64;
-        
-        //cart created with of-age shopper w/ 1 dairy
-        dairy = createCart(40);
-        dairy.addItem(new Dairy());
-        dairyExpected = 3.24;
-        
-        //cart created with of-age shopper with 1 alcohol, 1 frozen
-        alcoholFrozen11 = createCart(40);
-        alcoholFrozen11.addItem(new Alcohol());
-        alcoholFrozen11.addItem(new FrozenFood());
-        alcoholFrozen11Expected = 10.8;
-        
-        //cart created with of-age shopper with 1 alcohol, 2 frozen
-        alcoholFrozen12 = createCart(40);
-        alcoholFrozen12.addItem(new Alcohol());
-        alcoholFrozen12.addItem(new FrozenFood());
-        alcoholFrozen12.addItem(new FrozenFood());
-        alcoholFrozen12Expected = 16.2;
-        
-        //cart created with 3 produce
-        produce3 = createCart(40);
-        produce3.addItem(new Produce());
-        produce3.addItem(new Produce());
-        produce3.addItem(new Produce());
-        produce3Expected = 5.40;
-        */
-        
-        
-        cartZero = createCart(0);
-        cartOne = createCart(1);
-        cart15 = createCart(15);
-        cart20 = createCart(20);
-        cart21 = createCart(21);
-        cart22 = createCart(22);
-        cart35 = createCart(35);
-        cartNegOne = createCart(-1);
-        
-        myCart = createCart(40);
+        myCart = new Cart(40);
         }
     
     
@@ -171,7 +82,6 @@ public class BlackBoxGiven {
     	double amount = cart1.calcCost();
         assertEquals(cart1Expected, amount, .01);
     }
-    
     
     
     /**
@@ -476,6 +386,6 @@ public class BlackBoxGiven {
          myCart.addItem(new Produce());;
     assertEquals(1, myCart.Amount_saved());
    }
-    
+ 
     
 }

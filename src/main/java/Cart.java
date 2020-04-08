@@ -8,6 +8,17 @@ public class Cart {
     protected int userAge;
     public List<Product> cart;
     public int cartStorage;
+    
+    /*
+    private final int  DAIRY_PRICE = 3;
+    private final int  MEAT_PRICE = 10;
+    private final int  PRODUCE_PRICE = 2;
+    private final int ALCOHOL_PRICE = 8;
+    private final int FROZEN_PRICE = 5;
+    */
+    
+    private final int PRODUCE_DISC = 1;
+    private final int ALCOHOL_FROZEN_DISC = 3;
 
     /**
      * Calculates the final cost after all savings and tax has been applied. Also checks
@@ -28,7 +39,36 @@ public class Cart {
      * @throws UnderAgeException
      */
     public double calcCost() throws UnderAgeException {
-        return 0; //implement me, will be important for assignment 4 (nothing to do here for assignment 3)
+    	int subTotal = 0;
+    	int savings = 0;
+    	
+    	int alcoholCounter = 0;
+        int frozenFoodCounter = 0;
+        int dairyCounter = 0;
+        int produceCounter = 0;
+        int meatCounter = 0;
+
+        for(int i = 0; i < cart.size(); i++) {
+        	Product currentP = cart.get(i);
+        	subTotal += currentP.getCost();
+        	if(currentP.getClass().toString() == Dairy.class.toString()) {
+        		dairyCounter++;
+        	}
+        	else if(currentP.getClass().toString() == Meat.class.toString()) {
+        		meatCounter++;
+        	}
+        	else if(currentP.getClass().toString() == Alcohol.class.toString()) {
+        		alcoholCounter++;
+        	}
+        	else if(currentP.getClass().toString() == FrozenFood.class.toString()) {
+        		frozenFoodCounter++;
+        	}
+        	else if(currentP.getClass().toString() == Produce.class.toString()) {
+        		produceCounter++;
+        	}
+        }
+        
+        return subTotal;
     }
 
     // calculates how much was saved in the current shopping cart based on the deals, returns the saved amount
