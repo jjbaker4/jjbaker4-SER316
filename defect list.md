@@ -6,5 +6,4 @@
  4| Cart.java ln83| Switch statement instead of if else | CS 3 | LOW
  5| Cart.java ln71| This line should remove $3 from costAfterSavings, not add | FD | BR
  6| Produce.java ln5| Use of literal, not as a constant | CG6 | LOW
- 7| Cart.java ln118| Constructor should be before all other public mehotds | CG7 | LOW
- 8| Cart.java ln47| Potential here for a NullPointerException - RemoveItem() can leave a null in the list, cart | FD | BR
+ 7| Cart.java ln118| Constructor should be before all other public methods | CG7 | LOW

@@ -9,6 +9,12 @@ public class Cart {
     public List<Product> cart;
     public int cartStorage;
 
+    
+    public Cart(int age) {
+        userAge = age;
+        cart = new ArrayList<Product>();
+    }
+    
     /**
      * Calculates the final cost after all savings and tax has been applied. Also checks
      * that the user is of age to purchase alcohol if it is in their cart at checkout. Sales tax is always AZ tax.
@@ -115,8 +121,4 @@ public class Cart {
         return false;
     }
 
-    public Cart(int age) {
-        userAge = age;
-        cart = new ArrayList<Product>();
-    }
 }
