@@ -462,7 +462,7 @@ public class BlackBoxGiven {
    public void savingsAlcoholFrozen11Test() throws Exception, UnderAgeException {
     myCart.addItem(new Alcohol());
     myCart.addItem(new FrozenFood());
-    assertEquals(3, myCart.Amount_saved());
+    assertEquals(3, myCart.amountSaved());
    }
    
    /**
@@ -474,7 +474,7 @@ public class BlackBoxGiven {
    public void savingsProduce3Test() throws Exception, UnderAgeException {
     for (int i=0; i==2; i++)
          myCart.addItem(new Produce());;
-    assertEquals(1, myCart.Amount_saved());
+    assertEquals(1, myCart.amountSaved());
    }
     
     
