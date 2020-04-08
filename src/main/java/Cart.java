@@ -19,6 +19,7 @@ public class Cart {
     
     private final int PRODUCE_DISC = 1;
     private final int ALCOHOL_FROZEN_DISC = 3;
+    private final int ALCOHOL_LEGAL_AGE = 21;
 
     /**
      * Calculates the final cost after all savings and tax has been applied. Also checks
@@ -39,7 +40,7 @@ public class Cart {
      * @throws UnderAgeException
      */
     public double calcCost() throws UnderAgeException {
-    	int subTotal = 0;
+    	double  subTotal = 0.0;
     	int savings = 0;
     	
     	int alcoholCounter = 0;
@@ -51,24 +52,40 @@ public class Cart {
         for(int i = 0; i < cart.size(); i++) {
         	Product currentP = cart.get(i);
         	subTotal += currentP.getCost();
-        	if(currentP.getClass().toString() == Dairy.class.toString()) {
+        	if(currentP.getClass().toString().equals(Dairy.class.toString())) {
         		dairyCounter++;
         	}
-        	else if(currentP.getClass().toString() == Meat.class.toString()) {
+        	else if(currentP.getClass().toString().equals(Meat.class.toString())) {
         		meatCounter++;
         	}
-        	else if(currentP.getClass().toString() == Alcohol.class.toString()) {
+        	else if(currentP.getClass().toString().equals(Alcohol.class.toString())) {
+        		if (userAge < ALCOHOL_LEGAL_AGE) {
+        			throw new UnderAgeException("The User is not of age to purchase alcohol!");
+        		}
         		alcoholCounter++;
         	}
-        	else if(currentP.getClass().toString() == FrozenFood.class.toString()) {
+        	else if(currentP.getClass().toString().equals(FrozenFood.class.toString())) {
         		frozenFoodCounter++;
         	}
-        	else if(currentP.getClass().toString() == Produce.class.toString()) {
+        	else if(currentP.getClass().toString().equals(Produce.class.toString())) {
         		produceCounter++;
         	}
         }
         
-        return subTotal;
+        //Calculate produce discount
+        while(produceCounter > 2) {
+        	produceCounter -= 3;
+        	subTotal = subTotal-PRODUCE_DISC;
+        }
+        
+        //Calculate alcohol/frozen discount
+        while (alcoholCounter > 0 && frozenFoodCounter > 0) {
+        	alcoholCounter--;
+        	frozenFoodCounter--;
+        	subTotal = subTotal-ALCOHOL_FROZEN_DISC;
+        }
+        
+        return subTotal + getTax(subTotal, "AZ");
     }
 
     // calculates how much was saved in the current shopping cart based on the deals, returns the saved amount
