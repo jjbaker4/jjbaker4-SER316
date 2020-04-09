@@ -130,8 +130,7 @@ public class Cart {
                  frozenFoodCounter--;
             }
         }
-
-        return subTotal - costAfterSavings;
+        return subTotal + costAfterSavings;
     }
 
     // Gets the tax based on state and the total
