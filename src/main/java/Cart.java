@@ -89,7 +89,7 @@ public class Cart {
     }
 
     // calculates how much was saved in the current shopping cart based on the deals, returns the saved amount
-    // throws exception if alcohol is bought from underage person
+    // throws exception if alcohol is bought from underaged person
     // TODO: Create node graph for this method in assign 4: create white box tests and fix the method, reach at least 98% coverage
     public int Amount_saved() throws UnderAgeException {
         int subTotal = 0;
@@ -98,13 +98,14 @@ public class Cart {
         double produce_counter = 0;
         int alcoholCounter = 0;
         int frozenFoodCounter = 0;
-        int dairyCounter = 0;
+        //dairyCounter not needed or used
+        //int dairyCounter = 0;
 
         for(int i = 0; i < cart.size(); i++) {
             subTotal += cart.get(i).getCost();
-            costAfterSavings =costAfterSavings+cart.get(i).getCost();
-
-            if (cart.get(i).getClass().toString() == Produce.class.toString()) {
+            costAfterSavings = costAfterSavings+cart.get(i).getCost();
+           //use .equals() instead of ==
+            if (cart.get(i).getClass().toString().equals(Produce.class.toString())) {
                 produce_counter++;
 
                 if (produce_counter >= 3) {
@@ -112,25 +113,33 @@ public class Cart {
                     produce_counter = 0;
                 }
             }
-            else if (cart.get(i).getClass().toString()==Alcohol.class.toString()) {
+            //use .equals() instead of ==
+            else if (cart.get(i).getClass().toString().equals(Alcohol.class.toString())) {
                 alcoholCounter++;
                 if (userAge < 21) {
                     throw new UnderAgeException("The User is not of age to purchase alcohol!");
                 }
             }
-            else if (cart.get(i).getClass().toString() == FrozenFood.class.toString()) {
+            //use .equals() instead of ==
+            else if (cart.get(i).getClass().toString().equals(FrozenFood.class.toString())) {
                 frozenFoodCounter++;
             }
-            else if (cart.get(i).getClass().toString() == FrozenFood.class.toString())
+            //use .equals() instead of == | Also replaced FrozenFood with Dairy
+            //dairy not involved in any discounts. else-if removed
+            /*
+            else if (cart.get(i).getClass().toString().equals(Dairy.class.toString()))
                 dairyCounter++;
-
+            }
+            */
             if (alcoholCounter >= 1 && frozenFoodCounter >= 1) {
-                 costAfterSavings = costAfterSavings + 3;
+                 //fixed -> cost after savings MINUS 3 not PLUS 3
+            	 costAfterSavings = costAfterSavings - 3;
                  alcoholCounter--;
                  frozenFoodCounter--;
             }
         }
-        return subTotal + costAfterSavings;
+        //fixed -> should be subTotal minus costAfterSavings, not plus
+        return subTotal - costAfterSavings;
     }
 
     // Gets the tax based on state and the total
@@ -145,6 +154,7 @@ public class Cart {
                 break;
             case "NY":
                 newTotal = totalBT * .1;
+                break; //this break was missing
             case "CO":
                 newTotal = totalBT * .07;
                 break;
