@@ -416,7 +416,7 @@ public class BlackBoxGiven {
     	Alcohol coors = new Alcohol();
     	myCart.addItem(coors);
     	myCart.addItem(new FrozenFood());
-    	myCart.RemoveItem(coors);
+    	myCart.removeItem(coors);
     	assertEquals(5.40, myCart.calcCost(), .01);
     }
     
@@ -430,7 +430,7 @@ public class BlackBoxGiven {
     	myCart.addItem(apple);
     	myCart.addItem(new Produce());
     	myCart.addItem(new Produce());
-    	myCart.RemoveItem(apple);
+    	myCart.removeItem(apple);
     	assertEquals(4.32, myCart.calcCost(), .01);
     }
     
@@ -449,8 +449,8 @@ public class BlackBoxGiven {
     	myCart.addItem(new FrozenFood());
     	myCart.addItem(new Alcohol());
     	myCart.addItem(new FrozenFood());
-    	myCart.RemoveItem(apple);    	
-    	myCart.RemoveItem(coors);
+    	myCart.removeItem(apple);    	
+    	myCart.removeItem(coors);
     	assertEquals(25.92, myCart.calcCost(), .01);
     }
 }

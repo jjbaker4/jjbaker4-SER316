@@ -97,7 +97,7 @@ public class CartTest {
     	cart45.addItem(new FrozenFood());
     	cart45.addItem(new Dairy());
     	cart45.addItem(new Meat());
-		assertEquals(4, cart45.Amount_saved());
+		assertEquals(4, cart45.amountSaved());
     }
     
     /*
@@ -107,7 +107,7 @@ public class CartTest {
     @Test (expected = UnderAgeException.class)
     public void underAge() throws UnderAgeException{
     	cart20.addItem(new Alcohol());
-    	cart20.Amount_saved();
+    	cart20.amountSaved();
     }
     
     
@@ -140,13 +140,13 @@ public class CartTest {
     @Test
     public void testRemoveNoItem() {
     	Alcohol coors = new Alcohol();
-    	assertEquals(false, cart45.RemoveItem(coors));
+    	assertEquals(false, cart45.removeItem(coors));
     }
     @Test
     public void testRemoveYesItem() {
     	Alcohol coors = new Alcohol();
     	cart45.addItem(coors);
-    	assertEquals(true, cart45.RemoveItem(coors));
+    	assertEquals(true, cart45.removeItem(coors));
     }
     
     @Test
@@ -154,7 +154,7 @@ public class CartTest {
     	Alcohol coors = new Alcohol();
     	Produce carrot = new Produce();
     	cart45.addItem(carrot);
-    	assertEquals(false, cart45.RemoveItem(coors));
+    	assertEquals(false, cart45.removeItem(coors));
     }
     
     /**
@@ -367,7 +367,7 @@ public class CartTest {
     	Alcohol coors = new Alcohol();
     	myCart.addItem(coors);
     	myCart.addItem(new FrozenFood());
-    	myCart.RemoveItem(coors);
+    	myCart.removeItem(coors);
     	assertEquals(5.40, myCart.calcCost(), .01);
     }
     
@@ -380,7 +380,7 @@ public class CartTest {
     	myCart.addItem(apple);
     	myCart.addItem(new Produce());
     	myCart.addItem(new Produce());
-    	myCart.RemoveItem(apple);
+    	myCart.removeItem(apple);
     	assertEquals(4.32, myCart.calcCost(), .01);
     }
     
@@ -398,8 +398,8 @@ public class CartTest {
     	myCart.addItem(new FrozenFood());
     	myCart.addItem(new Alcohol());
     	myCart.addItem(new FrozenFood());
-    	myCart.RemoveItem(apple);    	
-    	myCart.RemoveItem(coors);
+    	myCart.removeItem(apple);    	
+    	myCart.removeItem(coors);
     	assertEquals(25.92, myCart.calcCost(), .01);
     }
     
