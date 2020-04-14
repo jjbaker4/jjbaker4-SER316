@@ -21,9 +21,10 @@ dependencies {
     compile files('cls/')
 }
 
-test {
-	exclude '**/BlackBoxGiven.class'
-}
+
+//test {
+//	exclude '**/BlackBoxGiven.class'
+//}
 
 ///////////////////////////////////////////////////////////////////////
 // Configure Checkstyle
