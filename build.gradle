@@ -22,9 +22,9 @@ dependencies {
 }
 
 
-//test {
-//	exclude '**/BlackBoxGiven.class'
-//}
+test {
+	exclude '**/BlackBoxGiven.class'
+}
 
 ///////////////////////////////////////////////////////////////////////
 // Configure Checkstyle
