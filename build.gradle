@@ -21,6 +21,7 @@ dependencies {
     compile files('cls/')
 }
 
+
 test {
 	exclude '**/BlackBoxGiven.class'
 }
