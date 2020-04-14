@@ -66,20 +66,21 @@ public class BlackBoxGiven {
     double produceExpected;
     double frozenExpected;
     
-    
+    /**
+     * Setup before each test.
+     * @throws Exception 
+     */
     @org.junit.Before
     public void setUp() throws Exception {
-
-    	
         // cart created with an age 40 shopper
         cart1 = createCart(40);
         for (int i = 0; i < 2; i++) {
             cart1.addItem(new Alcohol());
         }
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++)  {
             cart1.addItem(new Dairy());
         }
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)  {
             cart1.addItem(new Meat());
         }
         
@@ -159,7 +160,7 @@ public class BlackBoxGiven {
         cartNegOne = createCart(-1);
         
         myCart = createCart(40);
-        }
+    }
     
     
     /**
