@@ -1,12 +1,12 @@
 #SpotBugs User Preferences
-#Tue Apr 14 20:38:27 EDT 2020
+#Tue Apr 14 20:56:30 EDT 2020
 detectorExplicitSerialization=ExplicitSerialization|true
 detectorMultithreadedInstanceAccess=MultithreadedInstanceAccess|true
 detectorConfusionBetweenInheritedAndOuterMethod=ConfusionBetweenInheritedAndOuterMethod|true
 detectorWrongMapIterator=WrongMapIterator|true
 detectorUnnecessaryMath=UnnecessaryMath|true
 detectorUselessSubclassMethod=UselessSubclassMethod|false
-filter_settings=Medium|BAD_PRACTICE,CORRECTNESS,EXPERIMENTAL,I18N,MALICIOUS_CODE,MT_CORRECTNESS,PERFORMANCE,SECURITY,STYLE|false|20
+filter_settings=Medium|BAD_PRACTICE,CORRECTNESS,EXPERIMENTAL,I18N,MALICIOUS_CODE,MT_CORRECTNESS,PERFORMANCE,STYLE|false|20
 detectorURLProblems=URLProblems|true
 detectorIteratorIdioms=IteratorIdioms|true
 detectorMutableEnum=MutableEnum|true
@@ -71,7 +71,7 @@ detectorFindSelfComparison=FindSelfComparison|true
 detectorFindFloatEquality=FindFloatEquality|true
 detectorFindComparatorProblems=FindComparatorProblems|true
 detectorRepeatedConditionals=RepeatedConditionals|true
-filter_settings_neg=NOISE|
+filter_settings_neg=SECURITY,NOISE|
 detectorInefficientMemberAccess=InefficientMemberAccess|false
 detectorFindUncalledPrivateMethods=FindUncalledPrivateMethods|true
 detectorNumberConstructor=NumberConstructor|true
