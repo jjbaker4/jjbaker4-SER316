@@ -1,5 +1,5 @@
 // plugins {
-     id "com.github.spotbugs" version "3.0.0"
+//     id "com.github.spotbugs" version "3.0.0"
 //     id "checkstyle"
 // }
 
@@ -50,13 +50,13 @@ test {
 /////////////////////////////////////////////////////////////////////////
 // Configure SpotBugs
 /////////////////////////////////////////////////////////////////////////
-   spotbugs {
-  	toolVersion = '4.0.1'
-  }
+//   spotbugs {
+//  	toolVersion = '4.0.1'
+//  }
  // To generate an HTML report instead of XML 
-  tasks.withType(com.github.spotbugs.SpotBugsTask) {
-    reports {
-      xml.enabled = false
-      html.enabled = true
-    }
-  }
+//  tasks.withType(com.github.spotbugs.SpotBugsTask) {
+//    reports {
+//      xml.enabled = false
+//      html.enabled = true
+//    }
+//  }
