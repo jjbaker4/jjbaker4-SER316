@@ -1,7 +1,7 @@
-// plugins {
-//     id "com.github.spotbugs" version "3.0.0"
-//     id "checkstyle"
-// }
+ plugins {
+     //id "com.github.spotbugs" version "3.0.0"
+     //id "checkstyle"
+ }
 
 apply plugin: 'application'
 apply plugin: 'jacoco'
@@ -57,3 +57,7 @@ test {
  //     html.enabled = true
  //   }
  // }
+
+  //spotbugs {
+  //	toolVersion = '4.0.1'
+  //}
