@@ -7,7 +7,8 @@ public class Cart {
 
     protected int userAge;
     public List<Product> cart;
-    public int cartStorage;
+    //SER316 TASK 2 SPOTBUGS FIX
+    //public int cartStorage;
 
     /*
     private final int  DAIRY_PRICE = 3;
@@ -17,9 +18,12 @@ public class Cart {
     private final int FROZEN_PRICE = 5;
      */
 
-    private final int produceDisc = 1;
-    private final int alcoholFrozenDiscount = 3;
-    private final int alcoholLegalAge = 21;
+    //316 TASK 2 SPOTBUGS FIX
+    private static final int produceDisc = 1;
+    //316 TASK 2 SPOTBUGS FIX
+    private static final int alcoholFrozenDiscount = 3;
+    //316 TASK 2 SPOTBUGS FIX
+    private static final int alcoholLegalAge = 21;
 
     /**
      * Calculates the final cost after all savings and tax has been applied. Also checks

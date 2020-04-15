@@ -20,12 +20,16 @@ public class CartTest {
 	Cart cart20;
 	
     Cart cart1;
-    double cart1Expected;
+    
+    //SER316 TASK 2 SPOTBUGS FIX
+    //double cart1Expected;
     
     Cart myCart;
-    Cart cartNegOne;    
+    //SER316 TASK 2 SPOTBUGS FIX
+    //Cart cartNegOne;    
     Cart cartZero;
-    Cart cartOne;
+    //SER316 TASK 2 SPOTBUGS FIX
+    //Cart cartOne;
     Cart cart15;
     Cart cart21;
     Cart cart22;
@@ -55,7 +59,8 @@ public class CartTest {
             cart1.addItem(new Meat());
         }
         
-        cart1Expected = 70.2;
+        //SER316 TASK 2 SPOTBUGS FIX
+        //cart1Expected = 70.2;
         
         
         alcoholExpected = 8.64;
@@ -64,15 +69,17 @@ public class CartTest {
         produceExpected = 2.16;
         frozenExpected = 5.40;
 
-        
-        cartZero = new Cart(0);
-        cartOne = new Cart(1);
+        //SER316 TASK 2 SPOTBUGS FIX
+        //cartZero = new Cart(0);
+        //cartOne = new Cart(1);   
         cart15 = new Cart(15);
         cart20 = new Cart(20);
         cart21 = new Cart(21);
         cart22 = new Cart(22);
-        cart35 = new Cart(35);
-        cartNegOne = new Cart(-1);
+        //SER316 TASK 2 SPOTBUGS FIX
+        //cart35 = new Cart(35);
+        //SER316 TASK 2 SPOTBUGS FIX
+        //cartNegOne = new Cart(-1);
         
         myCart = new Cart(40);
         
@@ -163,7 +170,9 @@ public class CartTest {
      */
     @Test (expected = UnderAgeException.class)
     public void age0Test() throws Exception, UnderAgeException{
-    	cartZero.addItem(new Alcohol());
+        //SER316 TASK 2 SPOTBUGS FIX
+        Alcohol coors = new Alcohol();
+    	cartZero.addItem(coors);
     	cartZero.calcCost();
     }
     
@@ -174,7 +183,9 @@ public class CartTest {
      */
     @Test (expected = UnderAgeException.class)
     public void age1Test() throws Exception, UnderAgeException{
-    	cartZero.addItem(new Alcohol());
+        //SER316 TASK 2 SPOTBUGS FIX
+        Alcohol coors = new Alcohol();
+    	cartZero.addItem(coors);
     	cartZero.calcCost();
     }
   
@@ -184,7 +195,9 @@ public class CartTest {
      */
     @Test (expected = UnderAgeException.class)
     public void underAge15ExceptionTest() throws UnderAgeException {
-    	cart15.addItem(new Alcohol());
+        //SER316 TASK 2 SPOTBUGS FIX
+        Alcohol coors = new Alcohol();    	
+        cart15.addItem(coors);
     	cart15.calcCost();
     }
     
@@ -220,7 +233,9 @@ public class CartTest {
      */
     @Test 
     public void ofAge35ExceptionTest() throws UnderAgeException {
-    	cart35.addItem(new Alcohol());
+        //SER316 TASK 2 SPOTBUGS FIX
+        Alcohol coors = new Alcohol();
+    	cart35.addItem(coors);
     	cart35.calcCost();
     }    
 
@@ -230,7 +245,9 @@ public class CartTest {
      */
     @Test 
     public void alcoholPriceTest() throws UnderAgeException {
-    	myCart.addItem(new Alcohol());
+        //SER316 TASK 2 SPOTBUGS FIX
+        Alcohol coors = new Alcohol();   	
+        myCart.addItem(coors);
     	assertEquals(alcoholExpected, myCart.calcCost(), .01);
     }
     
@@ -276,8 +293,9 @@ public class CartTest {
      */
     @Test 
     public void produce3Test() throws UnderAgeException{
-    	for (int i = 0; i < 3; i++)
-    		myCart.addItem(new Produce());
+    	for (int i = 0; i < 3; i++) {
+            myCart.addItem(new Produce());
+        }
     	assertEquals(5.40, myCart.calcCost(), .01);
     }
     
@@ -286,8 +304,9 @@ public class CartTest {
      */
     @Test 
     public void produce4Test() throws UnderAgeException{
-    	for (int i = 0; i < 4; i++)
-    		myCart.addItem(new Produce());
+    	for (int i = 0; i < 4; i++) {
+            myCart.addItem(new Produce());
+        }
     	assertEquals(7.56, myCart.calcCost(), .01);
     }
     
@@ -296,8 +315,9 @@ public class CartTest {
      */
     @Test 
     public void produce6Test() throws UnderAgeException{
-    	for (int i = 0; i < 6; i++)
-    		myCart.addItem(new Produce());
+    	for (int i = 0; i < 6; i++) {
+            myCart.addItem(new Produce());
+        }
     	assertEquals(10.80, myCart.calcCost(), .01);
     }
     
@@ -350,8 +370,9 @@ public class CartTest {
      */
     @Test
     public void doubleStackBothDiscountsTest() throws Exception {
-    	for (int i=0; i < 6; i++)
-    		myCart.addItem(new Produce());
+    	for (int i=0; i < 6; i++) {
+            myCart.addItem(new Produce());
+        }
     	myCart.addItem(new Alcohol());
     	myCart.addItem(new FrozenFood());
     	myCart.addItem(new Alcohol());
@@ -389,8 +410,9 @@ public class CartTest {
      */
     @Test
     public void doubleStackBothDiscountsThenRemove() throws Exception {
-    	for (int i=0; i < 5; i++)
-    		myCart.addItem(new Produce());
+    	for (int i=0; i < 5; i++){
+            myCart.addItem(new Produce());
+        }
     	Produce apple = new Produce();
     	myCart.addItem(apple);
     	Alcohol coors = new Alcohol();
