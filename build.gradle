@@ -1,7 +1,7 @@
-// plugins {
+ plugins {
      id "com.github.spotbugs" version "3.0.0"
-//     id "checkstyle"
-// }
+     id "checkstyle"
+ }
 
 apply plugin: 'application'
 apply plugin: 'jacoco'
