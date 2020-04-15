@@ -53,7 +53,9 @@ public class BlackBoxGiven {
     
     Cart cartNegOne;    
     Cart cartZero;
-    Cart cartOne;
+    
+    //SER316 TASK 2 SPOTBUGS FIX
+    //Cart cartOne;
     Cart cart15;
     Cart cart20;
     Cart cart21;
@@ -73,9 +75,10 @@ public class BlackBoxGiven {
      */
     @org.junit.Before
     public void setUp() throws Exception {
+        
         // cart created with an age 40 shopper
-        //SER316 TASK 2 SPOTBUGS FIX
-        //cart1 = createCart(40);
+        cart1 = createCart(40);
+        
         //SER316 TASK 2 SPOTBUGS FIX
         /*
         for (int i = 0; i < 2; i++) {
