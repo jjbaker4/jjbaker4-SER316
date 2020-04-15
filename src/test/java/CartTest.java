@@ -40,6 +40,9 @@ public class CartTest {
     double meatExpected;
     double produceExpected;
     double frozenExpected;
+    
+    //SER316 TASK 2 SPOTBUGS FIX
+    Alcohol coors;
 
     @Before
     public void setUp() throws Exception {
@@ -63,26 +66,28 @@ public class CartTest {
         //cart1Expected = 70.2;
         
         
+        
         alcoholExpected = 8.64;
         dairyExpected = 3.24;
         meatExpected = 10.80;
         produceExpected = 2.16;
         frozenExpected = 5.40;
 
-        //SER316 TASK 2 SPOTBUGS FIX
-        //cartZero = new Cart(0);
-        //cartOne = new Cart(1);   
+        //cartOne = new Cart(1);
+        cartZero = new Cart(0);
         cart15 = new Cart(15);
         cart20 = new Cart(20);
         cart21 = new Cart(21);
         cart22 = new Cart(22);
         //SER316 TASK 2 SPOTBUGS FIX
-        //cart35 = new Cart(35);
+        cart35 = new Cart(35);
         //SER316 TASK 2 SPOTBUGS FIX
         //cartNegOne = new Cart(-1);
-        
+                
         myCart = new Cart(40);
         
+        //SER316 TASK 2 SPOTBUGS FIX
+        coors = new Alcohol();
     }
 
     @After
@@ -171,7 +176,6 @@ public class CartTest {
     @Test (expected = UnderAgeException.class)
     public void age0Test() throws Exception, UnderAgeException{
         //SER316 TASK 2 SPOTBUGS FIX
-        Alcohol coors = new Alcohol();
     	cartZero.addItem(coors);
     	cartZero.calcCost();
     }
@@ -184,7 +188,6 @@ public class CartTest {
     @Test (expected = UnderAgeException.class)
     public void age1Test() throws Exception, UnderAgeException{
         //SER316 TASK 2 SPOTBUGS FIX
-        Alcohol coors = new Alcohol();
     	cartZero.addItem(coors);
     	cartZero.calcCost();
     }
