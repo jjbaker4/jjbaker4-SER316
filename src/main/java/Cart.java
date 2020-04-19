@@ -143,10 +143,9 @@ public class Cart {
                  alcoholCounter--;
                  frozenFoodCounter--;
             }
-        }
         //fixed -> should be subTotal minus costAfterSavings, not plus
         return subTotal - costAfterSavings;
-    }
+        }
 
     // Gets the tax based on state and the total
     public double getTax(double totalBT, String twoLetterUSStateAbbreviation) {
