@@ -21,6 +21,12 @@ public class Cart {
     private final int ALCOHOL_FROZEN_DISC = 3;
     private final int ALCOHOL_LEGAL_AGE = 21;
 
+    
+    public Cart(int age) {
+        userAge = age;
+        cart = new ArrayList<Product>();
+    }
+    
     /**
      * Calculates the final cost after all savings and tax has been applied. Also checks
      * that the user is of age to purchase alcohol if it is in their cart at checkout. Sales tax is always AZ tax.
@@ -91,7 +97,7 @@ public class Cart {
     // calculates how much was saved in the current shopping cart based on the deals, returns the saved amount
     // throws exception if alcohol is bought from underaged person
     // TODO: Create node graph for this method in assign 4: create white box tests and fix the method, reach at least 98% coverage
-    public int Amount_saved() throws UnderAgeException {
+    public int amountSaved() throws UnderAgeException {
         int subTotal = 0;
         int costAfterSavings = 0;
 
@@ -131,7 +137,7 @@ public class Cart {
                 dairyCounter++;
             }
             */
-            if (alcoholCounter >= 1 && frozenFoodCounter >= 1) {
+            if (alcoholCounter >= 1 && frozenFoodCounter >= 1) ;
                  //fixed -> cost after savings MINUS 3 not PLUS 3
             	 costAfterSavings = costAfterSavings - 3;
                  alcoholCounter--;
@@ -181,8 +187,4 @@ public class Cart {
         return false;
     }
 
-    public Cart(int age) {
-        userAge = age;
-        cart = new ArrayList<Product>();
-    }
 }

@@ -92,63 +92,6 @@ public class BlackBoxGiven {
         produceExpected = 2.16;
         frozenExpected = 5.40;
         
-        //double alcoholFrozen11Expected;
-        //double alcoholFrozen12Expected;
-        //double produce3Expected;
-        
-        /*
-        //cart created with an age 20 shopper, containing alcohol
-        ageCart20 = createCart(20);
-        ageCart20.addItem(new Alcohol());
-        
-        //cart created with an age 21 shopper, containing alcohol
-        ageCart21 = createCart(21);
-        ageCart21.addItem(new Alcohol());
-        
-        //cart created with an age 22 shopper, containing alcohol
-        ageCart22 = createCart(22);
-        ageCart22.addItem(new Alcohol());
-        
-        //cart created with an age 15 shopper, containing alcohol
-        ageCart15 = createCart(15);
-        ageCart15.addItem(new Alcohol());
-        
-        //cart created with an age 35 shopper, containing alcohol
-        ageCart35 = createCart(35);
-        ageCart35.addItem(new Alcohol());
-        
-        //cart created with of-age shopper w/ 1 alcohol
-        alcohol = createCart(40);
-        alcohol.addItem(new Alcohol());
-        alcoholExpected = 8.64;
-        
-        //cart created with of-age shopper w/ 1 dairy
-        dairy = createCart(40);
-        dairy.addItem(new Dairy());
-        dairyExpected = 3.24;
-        
-        //cart created with of-age shopper with 1 alcohol, 1 frozen
-        alcoholFrozen11 = createCart(40);
-        alcoholFrozen11.addItem(new Alcohol());
-        alcoholFrozen11.addItem(new FrozenFood());
-        alcoholFrozen11Expected = 10.8;
-        
-        //cart created with of-age shopper with 1 alcohol, 2 frozen
-        alcoholFrozen12 = createCart(40);
-        alcoholFrozen12.addItem(new Alcohol());
-        alcoholFrozen12.addItem(new FrozenFood());
-        alcoholFrozen12.addItem(new FrozenFood());
-        alcoholFrozen12Expected = 16.2;
-        
-        //cart created with 3 produce
-        produce3 = createCart(40);
-        produce3.addItem(new Produce());
-        produce3.addItem(new Produce());
-        produce3.addItem(new Produce());
-        produce3Expected = 5.40;
-        */
-        
-        
         cartZero = createCart(0);
         cartOne = createCart(1);
         cart15 = createCart(15);
@@ -171,7 +114,6 @@ public class BlackBoxGiven {
     	double amount = cart1.calcCost();
         assertEquals(cart1Expected, amount, .01);
     }
-    
     
     
     /**
@@ -452,4 +394,29 @@ public class BlackBoxGiven {
     	myCart.RemoveItem(coors);
     	assertEquals(25.92, myCart.calcCost(), .01);
     }
+
+   /**
+    * Test Case 26
+    * @throws Exception
+    * @throws UnderAgeException
+    */
+   @Test
+   public void savingsAlcoholFrozen11Test() throws Exception, UnderAgeException {
+    myCart.addItem(new Alcohol());
+    myCart.addItem(new FrozenFood());
+    assertEquals(3, myCart.amountSaved());
+   }
+   
+   /**
+    * Test Case 27
+    * @throws Exception
+    * @throws UnderAgeException
+    */
+   @Test
+   public void savingsProduce3Test() throws Exception, UnderAgeException {
+    for (int i=0; i==2; i++)
+         myCart.addItem(new Produce());;
+    assertEquals(1, myCart.amountSaved());
+   }    
+
 }

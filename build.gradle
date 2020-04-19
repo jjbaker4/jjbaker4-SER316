@@ -31,7 +31,7 @@ test {
 /////////////////////////////////////////////////////////////////////
   apply plugin: 'checkstyle'
   checkstyle {
-    // Keep checkstyle a little quieter
+ // Keep checkstyle a little quieter
     ignoreFailures = true
     showViolations = false
   }
@@ -53,8 +53,8 @@ test {
    spotbugs {
   	toolVersion = '4.0.1'
   }
-// To generate an HTML report instead of XML 
-	tasks.withType(com.github.spotbugs.SpotBugsTask) {
+ // To generate an HTML report instead of XML 
+  tasks.withType(com.github.spotbugs.SpotBugsTask) {
     reports {
       xml.enabled = false
       html.enabled = true
