@@ -73,11 +73,15 @@ public class Cart {
         */
 
         //Calculate alcohol/frozen discount
+        subTotal = subTotal - calculateAlcoholFrozenDiscount(alcoholCounter, frozenFoodCounter);
+        
+        /*
         while (alcoholCounter > 0 && frozenFoodCounter > 0) {
             alcoholCounter--;
             frozenFoodCounter--;
             subTotal = subTotal - alcoholFrozenDiscount;
         }
+        */
 
         return subTotal + getTax(subTotal, "AZ");
     }
@@ -85,8 +89,8 @@ public class Cart {
     
     /**
      * Returns a count of the product type that matches the provided name
-     * @param typeName
-     * @return
+     * @param typeName String repsesentation of that product type
+     * @return count of that type
      */
     private int countProductType(String typeName) {
         int counter = 0;
@@ -98,13 +102,35 @@ public class Cart {
         return counter;
     }
     
-    
+    /**
+     * Returns the discount for produce purchases
+     * @param produceCount number of produce items in the cart
+     * @return the discount
+     */
     private int calculateProduceDiscount(int produceCount) {
         int produceCounter = produceCount;
         int discount = 0;
         while (produceCounter > 2) {
             produceCounter -= 3;
             discount += produceDisc;
+        }
+        return discount;
+    }
+    
+    /**
+     * Returns the discount for alcohol and frozen food purchased together
+     * @param alcoholCount number of alcohol items
+     * @param frozenCount number of frozen items
+     * @return the discount
+     */
+    private int calculateAlcoholFrozenDiscount(int alcoholCount, int frozenCount) {
+        int alcoholCounter = alcoholCount;
+        int frozenCounter = frozenCount;
+        int discount = 0;
+        while (alcoholCounter > 0 && frozenCounter > 0) {
+            alcoholCounter--;
+            frozenCounter--;
+            discount += alcoholFrozenDiscount;
         }
         return discount;
     }
