@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Cart {
@@ -153,24 +154,19 @@ public class Cart {
      * @return
      */
     public double getTax(double totalBt, String twoLetterStateAbbreviation) {
-        double newTotal = 0;
-        switch (twoLetterStateAbbreviation) {
-            case "AZ":
-                newTotal = totalBt * .08;
-                break;
-            case "CA":
-                newTotal = totalBt * .09;
-                break;
-            case "NY":
-                newTotal = totalBt * .1;
-                break; //this break was missing
-            case "CO":
-                newTotal = totalBt * .07;
-                break;
-            default:
-                return totalBt;
+        HashMap<String, Double> taxByState = new HashMap<String, Double>();
+        taxByState.put("AZ", .08);
+        taxByState.put("CA", .09);
+        taxByState.put("NY", .1);
+        taxByState.put("CO", .07);
+        
+        Double taxRate = taxByState.get(twoLetterStateAbbreviation);
+        
+        if(taxRate == null) {
+            return totalBt;
         }
-        return newTotal;
+        return taxRate.doubleValue() * totalBt;
+        
     }
 
     public void addItem(Product np) {
