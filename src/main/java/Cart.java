@@ -49,9 +49,6 @@ public class Cart {
         int savings = 0;
 
         int alcoholCounter = countProductType(Alcohol.class.toString());
-        if (alcoholCounter > 0 && userAge < alcoholLegalAge) {
-            throw new UnderAgeException("This user is not of age to purchase alcohol!");
-        }
         int frozenFoodCounter = countProductType(FrozenFood.class.toString());
         int dairyCounter = countProductType(Dairy.class.toString());
         int produceCounter = countProductType(Produce.class.toString());
@@ -62,26 +59,11 @@ public class Cart {
             subTotal += currentP.getCost();
         }
         
-        
         //Calculate produce discount
         subTotal = subTotal - calculateProduceDiscount(produceCounter);
-        /*
-        while (produceCounter > 2) {
-            produceCounter -= 3;
-            subTotal = subTotal - produceDisc;
-        }
-        */
 
         //Calculate alcohol/frozen discount
         subTotal = subTotal - calculateAlcoholFrozenDiscount(alcoholCounter, frozenFoodCounter);
-        
-        /*
-        while (alcoholCounter > 0 && frozenFoodCounter > 0) {
-            alcoholCounter--;
-            frozenFoodCounter--;
-            subTotal = subTotal - alcoholFrozenDiscount;
-        }
-        */
 
         return subTotal + getTax(subTotal, "AZ");
     }
@@ -89,15 +71,19 @@ public class Cart {
     
     /**
      * Returns a count of the product type that matches the provided name
-     * @param typeName String repsesentation of that product type
+     * @param typeName String representation of that product type
      * @return count of that type
+     * @throws UnderAgeException if user is under 21
      */
-    private int countProductType(String typeName) {
+    private int countProductType(String typeName) throws UnderAgeException {
         int counter = 0;
         for (Product p : cart) {
             if(p.getClass().toString().equalsIgnoreCase(typeName)) {
                 counter++;
             }
+        }
+        if(typeName.equalsIgnoreCase(Alcohol.class.toString()) && counter > 0 && userAge < alcoholLegalAge) {
+            throw new UnderAgeException("This user is not of age to purchase alcohol!");
         }
         return counter;
     }
@@ -105,7 +91,7 @@ public class Cart {
     /**
      * Returns the discount for produce purchases
      * @param produceCount number of produce items in the cart
-     * @return the discount
+     * @return the discount as int
      */
     private int calculateProduceDiscount(int produceCount) {
         int produceCounter = produceCount;
@@ -142,52 +128,13 @@ public class Cart {
      * @throws UnderAgeException if customer is under 21
      */
     public int amountSaved() throws UnderAgeException {
-        int subTotal = 0;
-        int costAfterSavings = 0;
-
-        int produceCounter = 0;
-        int alcoholCounter = 0;
-        int frozenFoodCounter = 0;
-        //dairyCounter not needed or used
-        //int dairyCounter = 0;
-
-        for (int i = 0; i < cart.size(); i++) {
-            subTotal += cart.get(i).getCost();
-            costAfterSavings = costAfterSavings + cart.get(i).getCost();
-            //use .equals() instead of ==
-            if (cart.get(i).getClass().toString().equals(Produce.class.toString())) {
-                produceCounter++;
-
-                if (produceCounter >= 3) {
-                    costAfterSavings -= 1;
-                    produceCounter = 0;
-                }
-            //use .equals() instead of ==
-            } else if (cart.get(i).getClass().toString().equals(Alcohol.class.toString())) {
-                alcoholCounter++;
-                if (userAge < 21) {
-                    throw new UnderAgeException("The User is not of age to purchase alcohol!");
-                }
-            //use .equals() instead of ==
-            } else if (cart.get(i).getClass().toString().equals(FrozenFood.class.toString())) {
-                frozenFoodCounter++;
-            }
-            //use .equals() instead of == | Also replaced FrozenFood with Dairy
-            //dairy not involved in any discounts. else-if removed
-            /*
-            else if (cart.get(i).getClass().toString().equals(Dairy.class.toString()))
-                dairyCounter++;
-            }
-             */
-            if (alcoholCounter >= 1 && frozenFoodCounter >= 1) {
-                //fixed -> cost after savings MINUS 3 not PLUS 3
-                costAfterSavings = costAfterSavings - 3;
-                alcoholCounter--;
-                frozenFoodCounter--;
-            }
-        }
-        //fixed -> should be subTotal minus costAfterSavings, not plus
-        return subTotal - costAfterSavings;
+        int alcoholCounter = countProductType(Alcohol.class.toString());
+        int frozenFoodCounter = countProductType(FrozenFood.class.toString());
+        int produceCounter = countProductType(Produce.class.toString());
+        
+        int discount = calculateAlcoholFrozenDiscount(alcoholCounter, frozenFoodCounter) 
+                + calculateProduceDiscount(produceCounter);
+        return discount;
     }
 
 
@@ -195,7 +142,7 @@ public class Cart {
      * Gets the tax based on state and the total.
      * @param totalBt subtotal
      * @param twoLetterStateAbbreviation state
-     * @return
+     * @return the sales tax a double
      */
     public double getTax(double totalBt, String twoLetterStateAbbreviation) {
         HashMap<String, Double> taxByState = new HashMap<String, Double>();
@@ -220,7 +167,7 @@ public class Cart {
     /**
      * Removed item from the shopping cart.
      * @param productToRemove Product type item in cart
-     * @return true if sucessful
+     * @return true if successful
      */
     public boolean removeItem(Product productToRemove) {
         boolean test = false;
