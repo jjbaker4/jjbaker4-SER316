@@ -61,3 +61,12 @@ test {
       html.enabled = true
     }
   }
+
+  apply plugin: "pmd"
+  pmd {
+    ignoreFailures = true 
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/pmd")
+    ruleSets = []
+    ruleSetConfig = resources.text.fromFile('ruleset.xml')
+  }
