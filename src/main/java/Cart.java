@@ -48,36 +48,29 @@ public class Cart {
         double  subTotal = 0.0;
         int savings = 0;
 
-        int alcoholCounter = 0;
-        int frozenFoodCounter = 0;
-        int dairyCounter = 0;
-        int produceCounter = 0;
-        int meatCounter = 0;
-
+        int alcoholCounter = countProductType(Alcohol.class.toString());
+        if (alcoholCounter > 0 && userAge < alcoholLegalAge) {
+            throw new UnderAgeException("This user is not of age to purchase alcohol!");
+        }
+        int frozenFoodCounter = countProductType(FrozenFood.class.toString());
+        int dairyCounter = countProductType(Dairy.class.toString());
+        int produceCounter = countProductType(Produce.class.toString());
+        int meatCounter = countProductType(Meat.class.toString());
+        
         for (int i = 0; i < cart.size(); i++) {
             Product currentP = cart.get(i);
             subTotal += currentP.getCost();
-            if (currentP.getClass().toString().equals(Dairy.class.toString())) {
-                dairyCounter++;
-            } else if (currentP.getClass().toString().equals(Meat.class.toString())) {
-                meatCounter++;
-            } else if (currentP.getClass().toString().equals(Alcohol.class.toString())) {
-                if (userAge < alcoholLegalAge) {
-                    throw new UnderAgeException("The User is not of age to purchase alcohol!");
-                }
-                alcoholCounter++;
-            } else if (currentP.getClass().toString().equals(FrozenFood.class.toString())) {
-                frozenFoodCounter++;
-            } else if (currentP.getClass().toString().equals(Produce.class.toString())) {
-                produceCounter++;
-            }
         }
-
+        
+        
         //Calculate produce discount
+        subTotal = subTotal - calculateProduceDiscount(produceCounter);
+        /*
         while (produceCounter > 2) {
             produceCounter -= 3;
             subTotal = subTotal - produceDisc;
         }
+        */
 
         //Calculate alcohol/frozen discount
         while (alcoholCounter > 0 && frozenFoodCounter > 0) {
@@ -88,9 +81,33 @@ public class Cart {
 
         return subTotal + getTax(subTotal, "AZ");
     }
-
-    // TODO: Create node graph for this method in assign 4: create white box tests and fix the
-    //method, reach at least 98% coverage
+    
+    
+    /**
+     * Returns a count of the product type that matches the provided name
+     * @param typeName
+     * @return
+     */
+    private int countProductType(String typeName) {
+        int counter = 0;
+        for (Product p : cart) {
+            if(p.getClass().toString().equalsIgnoreCase(typeName)) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+    
+    
+    private int calculateProduceDiscount(int produceCount) {
+        int produceCounter = produceCount;
+        int discount = 0;
+        while (produceCounter > 2) {
+            produceCounter -= 3;
+            discount += produceDisc;
+        }
+        return discount;
+    }
     
     /**
      * calculates how much was saved in the current shopping cart based on the deals, returns 
@@ -102,7 +119,7 @@ public class Cart {
         int subTotal = 0;
         int costAfterSavings = 0;
 
-        double produceCounter = 0;
+        int produceCounter = 0;
         int alcoholCounter = 0;
         int frozenFoodCounter = 0;
         //dairyCounter not needed or used
@@ -146,6 +163,7 @@ public class Cart {
         //fixed -> should be subTotal minus costAfterSavings, not plus
         return subTotal - costAfterSavings;
     }
+
 
     /**
      * Gets the tax based on state and the total.
