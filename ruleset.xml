@@ -34,5 +34,10 @@
 </rule>
 <rule ref="category/java/bestpractices.xml/LooseCoupling" />
 
+<rule ref="category/java/design.xml/ExcessiveParameterList">
+    <properties>
+        <property name="minimum" value="10.0" />
+    </properties>
+</rule>
 
 </ruleset>

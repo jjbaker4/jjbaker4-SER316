@@ -46,25 +46,13 @@ public class Cart {
      */
     public double calcCost() throws UnderAgeException {
         double  subTotal = 0.0;
-        int savings = 0;
-
-        int alcoholCounter = countProductType(Alcohol.class.toString());
-        int frozenFoodCounter = countProductType(FrozenFood.class.toString());
-        int dairyCounter = countProductType(Dairy.class.toString());
-        int produceCounter = countProductType(Produce.class.toString());
-        int meatCounter = countProductType(Meat.class.toString());
-        
+       
         for (int i = 0; i < cart.size(); i++) {
             Product currentP = cart.get(i);
             subTotal += currentP.getCost();
         }
         
-        //Calculate produce discount
-        subTotal = subTotal - calculateProduceDiscount(produceCounter);
-
-        //Calculate alcohol/frozen discount
-        subTotal = subTotal - calculateAlcoholFrozenDiscount(alcoholCounter, frozenFoodCounter);
-
+        subTotal -= amountSaved();      
         return subTotal + getTax(subTotal, "AZ");
     }
     
@@ -157,9 +145,12 @@ public class Cart {
             return totalBt;
         }
         return taxRate.doubleValue() * totalBt;
-        
     }
-
+    
+    /**
+     * Adds the product to the cart
+     * @param np Product to be added to cart
+     */
     public void addItem(Product np) {
         cart.add(np);
     }
